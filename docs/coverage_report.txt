@@ -1,0 +1,259 @@
+============================= test session starts ==============================
+platform linux -- Python 3.13.9, pytest-8.4.2, pluggy-1.5.0
+rootdir: /home/harismalik/SQE-Assignment-2
+configfile: pytest.ini
+testpaths: tests
+plugins: anyio-4.10.0, cov-7.1.0
+collected 56 items
+
+tests/test_blackbox.py .FF.........F.F.FF..F.....FFFFF.                  [ 57%]
+tests/test_whitebox.py ........F...F...F..FFFF.                          [100%]
+
+=================================== FAILURES ===================================
+___________________ test_credit_limit_boundaries[14-4-True] ____________________
+
+current = 14, new = 4, expected = True
+
+    @pytest.mark.parametrize("current,new,expected", [
+        (0, 1, True), (14, 4, True), (15, 3, True),  # exactly 18 is allowed
+        (16, 3, False), (18, 1, False),
+    ])
+    def test_credit_limit_boundaries(current, new, expected):
+>       assert check_credit_limit(current, new) is expected
+E       assert False is True
+E        +  where False = check_credit_limit(14, 4)
+
+tests/test_blackbox.py:28: AssertionError
+___________________ test_credit_limit_boundaries[15-3-True] ____________________
+
+current = 15, new = 3, expected = True
+
+    @pytest.mark.parametrize("current,new,expected", [
+        (0, 1, True), (14, 4, True), (15, 3, True),  # exactly 18 is allowed
+        (16, 3, False), (18, 1, False),
+    ])
+    def test_credit_limit_boundaries(current, new, expected):
+>       assert check_credit_limit(current, new) is expected
+E       assert False is True
+E        +  where False = check_credit_limit(15, 3)
+
+tests/test_blackbox.py:28: AssertionError
+______________ test_one_missing_prerequisite_means_not_satisfied _______________
+
+    def test_one_missing_prerequisite_means_not_satisfied():
+>       assert prerequisites_satisfied({"CS101"}, {"CS101", "MATH101"}) is False
+E       AssertionError: assert True is False
+E        +  where True = prerequisites_satisfied({'CS101'}, {'CS101', 'MATH101'})
+
+tests/test_blackbox.py:52: AssertionError
+__________________ test_any_positive_dues_block_registration ___________________
+
+    def test_any_positive_dues_block_registration():
+        student = make_student(outstanding_dues=1)
+>       assert registration_decision(student, make_course()) == "DUES_BLOCK"
+E       AssertionError: assert 'REGISTERED' == 'DUES_BLOCK'
+E         
+E         - DUES_BLOCK
+E         + REGISTERED
+
+tests/test_blackbox.py:60: AssertionError
+________________ test_missing_prerequisite_blocks_registration _________________
+
+    def test_missing_prerequisite_blocks_registration():
+        student = make_student(completed_courses={"CS101"})
+        course = make_course(prerequisites={"CS101", "MATH101"})
+>       assert registration_decision(student, course) == "PREREQUISITES_MISSING"
+E       AssertionError: assert 'REGISTERED' == 'PREREQUISITES_MISSING'
+E         
+E         - PREREQUISITES_MISSING
+E         + REGISTERED
+
+tests/test_blackbox.py:70: AssertionError
+________________ test_exactly_18_credits_is_allowed_in_decision ________________
+
+    def test_exactly_18_credits_is_allowed_in_decision():
+        student = make_student(current_credits=15)
+>       assert registration_decision(student, make_course(credit_hours=3)) == "REGISTERED"
+E       AssertionError: assert 'CREDIT_LIMIT' == 'REGISTERED'
+E         
+E         - REGISTERED
+E         + CREDIT_LIMIT
+
+tests/test_blackbox.py:74: AssertionError
+_____________________ test_full_course_returns_waitlisted ______________________
+
+    def test_full_course_returns_waitlisted():
+>       assert registration_decision(make_student(), make_course(capacity=2, enrolled=2)) == "WAITLISTED"
+E       AssertionError: assert 'REGISTERED' == 'WAITLISTED'
+E         
+E         - WAITLISTED
+E         + REGISTERED
+
+tests/test_blackbox.py:84: AssertionError
+___________ test_successful_registration_updates_all_required_state ____________
+
+    def test_successful_registration_updates_all_required_state():
+        student = make_student(current_credits=15)
+        course = make_course(credit_hours=3, capacity=10, enrolled=2)
+        result = register_course(student, course)
+>       assert result == "REGISTERED"
+E       AssertionError: assert 'CREDIT_LIMIT' == 'REGISTERED'
+E         
+E         - REGISTERED
+E         + CREDIT_LIMIT
+
+tests/test_blackbox.py:117: AssertionError
+__________ test_waitlisting_adds_student_once_without_other_mutations __________
+
+    def test_waitlisting_adds_student_once_without_other_mutations():
+        student = make_student(student_id="S009")
+        course = make_course(capacity=5, enrolled=5)
+        result = register_course(student, course)
+>       assert result == "WAITLISTED"
+E       AssertionError: assert 'REGISTERED' == 'WAITLISTED'
+E         
+E         - WAITLISTED
+E         + REGISTERED
+
+tests/test_blackbox.py:126: AssertionError
+________________ test_existing_waitlist_entry_is_not_duplicated ________________
+
+    def test_existing_waitlist_entry_is_not_duplicated():
+        student = make_student(student_id="S009")
+        course = make_course(capacity=5, enrolled=5, waitlist=["S009"])
+>       assert register_course(student, course) == "WAITLISTED"
+E       AssertionError: assert 'REGISTERED' == 'WAITLISTED'
+E         
+E         - WAITLISTED
+E         + REGISTERED
+
+tests/test_blackbox.py:135: AssertionError
+_______________ test_blocked_registration_does_not_change_state ________________
+
+    def test_blocked_registration_does_not_change_state():
+        student = make_student(outstanding_dues=1)
+        course = make_course()
+        student_before, course_before = copy.deepcopy(student), copy.deepcopy(course)
+>       assert register_course(student, course) == "DUES_BLOCK"
+E       AssertionError: assert 'REGISTERED' == 'DUES_BLOCK'
+E         
+E         - DUES_BLOCK
+E         + REGISTERED
+
+tests/test_blackbox.py:142: AssertionError
+__________________ test_withdrawal_updates_student_and_course __________________
+
+    def test_withdrawal_updates_student_and_course():
+        student = make_student(current_credits=6, registered_courses={"CS201"})
+        course = make_course(credit_hours=3, enrolled=4)
+        assert withdraw_course(student, course) is True
+        assert student.registered_courses == set()
+        assert student.current_credits == 3
+>       assert course.enrolled == 3
+E       AssertionError: assert 4 == 3
+E        +  where 4 = Course(code='CS201', credit_hours=3, capacity=30, enrolled=4, prerequisites=set(), waitlist=[]).enrolled
+
+tests/test_blackbox.py:153: AssertionError
+___________________ test_prerequisite_partial_overlap_branch ___________________
+
+    def test_prerequisite_partial_overlap_branch():
+>       assert prerequisites_satisfied({"A"}, {"A", "B"}) is False
+E       AssertionError: assert True is False
+E        +  where True = prerequisites_satisfied({'A'}, {'A', 'B'})
+
+tests/test_whitebox.py:43: AssertionError
+_______________________ test_decision_dues_block_branch ________________________
+
+    def test_decision_dues_block_branch():
+>       assert registration_decision(student(outstanding_dues=1), course()) == "DUES_BLOCK"
+E       AssertionError: assert 'REGISTERED' == 'DUES_BLOCK'
+E         
+E         - DUES_BLOCK
+E         + REGISTERED
+
+tests/test_whitebox.py:57: AssertionError
+________________________ test_decision_waitlist_branch _________________________
+
+    def test_decision_waitlist_branch():
+>       assert registration_decision(student(), course(enrolled=2)) == "WAITLISTED"
+E       AssertionError: assert 'REGISTERED' == 'WAITLISTED'
+E         
+E         - WAITLISTED
+E         + REGISTERED
+
+tests/test_whitebox.py:69: AssertionError
+_____________________ test_register_course_waitlist_branch _____________________
+
+    def test_register_course_waitlist_branch():
+        s, c = student(), course(enrolled=2)
+>       assert register_course(s, c) == "WAITLISTED"
+E       AssertionError: assert 'REGISTERED' == 'WAITLISTED'
+E         
+E         - WAITLISTED
+E         + REGISTERED
+
+tests/test_whitebox.py:83: AssertionError
+________________ test_register_course_existing_waitlist_branch _________________
+
+    def test_register_course_existing_waitlist_branch():
+        s, c = student(), course(enrolled=2, waitlist=["W001"])
+>       assert register_course(s, c) == "WAITLISTED"
+E       AssertionError: assert 'REGISTERED' == 'WAITLISTED'
+E         
+E         - WAITLISTED
+E         + REGISTERED
+
+tests/test_whitebox.py:88: AssertionError
+________________ test_register_course_unsuccessful_noop_branch _________________
+
+    def test_register_course_unsuccessful_noop_branch():
+        s, c = student(outstanding_dues=1), course()
+        before = (set(s.registered_courses), s.current_credits, c.enrolled, list(c.waitlist))
+>       assert register_course(s, c) == "DUES_BLOCK"
+E       AssertionError: assert 'REGISTERED' == 'DUES_BLOCK'
+E         
+E         - DUES_BLOCK
+E         + REGISTERED
+
+tests/test_whitebox.py:94: AssertionError
+_______________________ test_withdraw_course_true_branch _______________________
+
+    def test_withdraw_course_true_branch():
+        s, c = student(current_credits=2, registered_courses={"WB101"}), course(enrolled=1)
+        assert withdraw_course(s, c) is True
+        assert s.registered_courses == set()
+        assert s.current_credits == 0
+>       assert c.enrolled == 0
+E       AssertionError: assert 1 == 0
+E        +  where 1 = Course(code='WB101', credit_hours=2, capacity=2, enrolled=1, prerequisites=set(), waitlist=[]).enrolled
+
+tests/test_whitebox.py:102: AssertionError
+================================ tests coverage ================================
+_______________ coverage: platform linux, python 3.13.9-final-0 ________________
+
+Name              Stmts   Miss Branch BrPart  Cover   Missing
+-------------------------------------------------------------
+registration.py      57      3     26      3    93%   51, 59, 71
+-------------------------------------------------------------
+TOTAL                57      3     26      3    93%
+=========================== short test summary info ============================
+FAILED tests/test_blackbox.py::test_credit_limit_boundaries[14-4-True] - asse...
+FAILED tests/test_blackbox.py::test_credit_limit_boundaries[15-3-True] - asse...
+FAILED tests/test_blackbox.py::test_one_missing_prerequisite_means_not_satisfied
+FAILED tests/test_blackbox.py::test_any_positive_dues_block_registration - As...
+FAILED tests/test_blackbox.py::test_missing_prerequisite_blocks_registration
+FAILED tests/test_blackbox.py::test_exactly_18_credits_is_allowed_in_decision
+FAILED tests/test_blackbox.py::test_full_course_returns_waitlisted - Assertio...
+FAILED tests/test_blackbox.py::test_successful_registration_updates_all_required_state
+FAILED tests/test_blackbox.py::test_waitlisting_adds_student_once_without_other_mutations
+FAILED tests/test_blackbox.py::test_existing_waitlist_entry_is_not_duplicated
+FAILED tests/test_blackbox.py::test_blocked_registration_does_not_change_state
+FAILED tests/test_blackbox.py::test_withdrawal_updates_student_and_course - A...
+FAILED tests/test_whitebox.py::test_prerequisite_partial_overlap_branch - Ass...
+FAILED tests/test_whitebox.py::test_decision_dues_block_branch - AssertionErr...
+FAILED tests/test_whitebox.py::test_decision_waitlist_branch - AssertionError...
+FAILED tests/test_whitebox.py::test_register_course_waitlist_branch - Asserti...
+FAILED tests/test_whitebox.py::test_register_course_existing_waitlist_branch
+FAILED tests/test_whitebox.py::test_register_course_unsuccessful_noop_branch
+FAILED tests/test_whitebox.py::test_withdraw_course_true_branch - AssertionEr...
+======================== 19 failed, 37 passed in 0.20s =========================
