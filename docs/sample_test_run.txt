@@ -1,0 +1,299 @@
+Simulated test run against the registration.py code pasted in the chat.
+Command: python -m pytest -q
+
+[32m.[0m[31mF[0m[31mF[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[31mF[0m[32m.[0m[31mF[0m[32m.[0m[31mF[0m[31mF[0m[32m.[0m[32m.[0m[31mF[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[31mF[0m[31mF[0m[31mF[0m[31mF[0m[31mF[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[31mF[0m[32m.[0m[32m.[0m[32m.[0m[31mF[0m[32m.[0m[32m.[0m[32m.[0m[31mF[0m[32m.[0m[32m.[0m[31mF[0m[31mF[0m[31mF[0m[31mF[0m[32m.[0m[31m                 [100%][0m
+=================================== FAILURES ===================================
+[31m[1m___________________ test_credit_limit_boundaries[14-4-True] ____________________[0m
+
+current = 14, new = 4, expected = True
+
+    [0m[37m@pytest[39;49;00m.mark.parametrize([33m"[39;49;00m[33mcurrent,new,expected[39;49;00m[33m"[39;49;00m, [[90m[39;49;00m
+        ([94m0[39;49;00m, [94m1[39;49;00m, [94mTrue[39;49;00m), ([94m14[39;49;00m, [94m4[39;49;00m, [94mTrue[39;49;00m), ([94m15[39;49;00m, [94m3[39;49;00m, [94mTrue[39;49;00m),  [90m# exactly 18 is allowed[39;49;00m[90m[39;49;00m
+        ([94m16[39;49;00m, [94m3[39;49;00m, [94mFalse[39;49;00m), ([94m18[39;49;00m, [94m1[39;49;00m, [94mFalse[39;49;00m),[90m[39;49;00m
+    ])[90m[39;49;00m
+    [94mdef[39;49;00m[90m [39;49;00m[92mtest_credit_limit_boundaries[39;49;00m(current, new, expected):[90m[39;49;00m
+>       [94massert[39;49;00m check_credit_limit(current, new) [95mis[39;49;00m expected[90m[39;49;00m
+[1m[31mE       assert False is True[0m
+[1m[31mE        +  where False = check_credit_limit(14, 4)[0m
+
+[1m[31mtests/test_blackbox.py[0m:28: AssertionError
+[31m[1m___________________ test_credit_limit_boundaries[15-3-True] ____________________[0m
+
+current = 15, new = 3, expected = True
+
+    [0m[37m@pytest[39;49;00m.mark.parametrize([33m"[39;49;00m[33mcurrent,new,expected[39;49;00m[33m"[39;49;00m, [[90m[39;49;00m
+        ([94m0[39;49;00m, [94m1[39;49;00m, [94mTrue[39;49;00m), ([94m14[39;49;00m, [94m4[39;49;00m, [94mTrue[39;49;00m), ([94m15[39;49;00m, [94m3[39;49;00m, [94mTrue[39;49;00m),  [90m# exactly 18 is allowed[39;49;00m[90m[39;49;00m
+        ([94m16[39;49;00m, [94m3[39;49;00m, [94mFalse[39;49;00m), ([94m18[39;49;00m, [94m1[39;49;00m, [94mFalse[39;49;00m),[90m[39;49;00m
+    ])[90m[39;49;00m
+    [94mdef[39;49;00m[90m [39;49;00m[92mtest_credit_limit_boundaries[39;49;00m(current, new, expected):[90m[39;49;00m
+>       [94massert[39;49;00m check_credit_limit(current, new) [95mis[39;49;00m expected[90m[39;49;00m
+[1m[31mE       assert False is True[0m
+[1m[31mE        +  where False = check_credit_limit(15, 3)[0m
+
+[1m[31mtests/test_blackbox.py[0m:28: AssertionError
+[31m[1m______________ test_one_missing_prerequisite_means_not_satisfied _______________[0m
+
+    [0m[94mdef[39;49;00m[90m [39;49;00m[92mtest_one_missing_prerequisite_means_not_satisfied[39;49;00m():[90m[39;49;00m
+>       [94massert[39;49;00m prerequisites_satisfied({[33m"[39;49;00m[33mCS101[39;49;00m[33m"[39;49;00m}, {[33m"[39;49;00m[33mCS101[39;49;00m[33m"[39;49;00m, [33m"[39;49;00m[33mMATH101[39;49;00m[33m"[39;49;00m}) [95mis[39;49;00m [94mFalse[39;49;00m[90m[39;49;00m
+[1m[31mE       AssertionError: assert True is False[0m
+[1m[31mE        +  where True = prerequisites_satisfied({'CS101'}, {'CS101', 'MATH101'})[0m
+
+[1m[31mtests/test_blackbox.py[0m:52: AssertionError
+[31m[1m__________________ test_any_positive_dues_block_registration ___________________[0m
+
+    [0m[94mdef[39;49;00m[90m [39;49;00m[92mtest_any_positive_dues_block_registration[39;49;00m():[90m[39;49;00m
+        student = make_student(outstanding_dues=[94m1[39;49;00m)[90m[39;49;00m
+>       [94massert[39;49;00m registration_decision(student, make_course()) == [33m"[39;49;00m[33mDUES_BLOCK[39;49;00m[33m"[39;49;00m[90m[39;49;00m
+[1m[31mE       AssertionError: assert 'REGISTERED' == 'DUES_BLOCK'[0m
+[1m[31mE         [0m
+[1m[31mE         [0m[91m- DUES_BLOCK[39;49;00m[90m[39;49;00m[0m
+[1m[31mE         [92m+ REGISTERED[39;49;00m[90m[39;49;00m[0m
+
+[1m[31mtests/test_blackbox.py[0m:60: AssertionError
+[31m[1m________________ test_missing_prerequisite_blocks_registration _________________[0m
+
+    [0m[94mdef[39;49;00m[90m [39;49;00m[92mtest_missing_prerequisite_blocks_registration[39;49;00m():[90m[39;49;00m
+        student = make_student(completed_courses={[33m"[39;49;00m[33mCS101[39;49;00m[33m"[39;49;00m})[90m[39;49;00m
+        course = make_course(prerequisites={[33m"[39;49;00m[33mCS101[39;49;00m[33m"[39;49;00m, [33m"[39;49;00m[33mMATH101[39;49;00m[33m"[39;49;00m})[90m[39;49;00m
+>       [94massert[39;49;00m registration_decision(student, course) == [33m"[39;49;00m[33mPREREQUISITES_MISSING[39;49;00m[33m"[39;49;00m[90m[39;49;00m
+[1m[31mE       AssertionError: assert 'REGISTERED' == 'PREREQUISITES_MISSING'[0m
+[1m[31mE         [0m
+[1m[31mE         [0m[91m- PREREQUISITES_MISSING[39;49;00m[90m[39;49;00m[0m
+[1m[31mE         [92m+ REGISTERED[39;49;00m[90m[39;49;00m[0m
+
+[1m[31mtests/test_blackbox.py[0m:70: AssertionError
+[31m[1m________________ test_exactly_18_credits_is_allowed_in_decision ________________[0m
+
+    [0m[94mdef[39;49;00m[90m [39;49;00m[92mtest_exactly_18_credits_is_allowed_in_decision[39;49;00m():[90m[39;49;00m
+        student = make_student(current_credits=[94m15[39;49;00m)[90m[39;49;00m
+>       [94massert[39;49;00m registration_decision(student, make_course(credit_hours=[94m3[39;49;00m)) == [33m"[39;49;00m[33mREGISTERED[39;49;00m[33m"[39;49;00m[90m[39;49;00m
+[1m[31mE       AssertionError: assert 'CREDIT_LIMIT' == 'REGISTERED'[0m
+[1m[31mE         [0m
+[1m[31mE         [0m[91m- REGISTERED[39;49;00m[90m[39;49;00m[0m
+[1m[31mE         [92m+ CREDIT_LIMIT[39;49;00m[90m[39;49;00m[0m
+
+[1m[31mtests/test_blackbox.py[0m:74: AssertionError
+[31m[1m_____________________ test_full_course_returns_waitlisted ______________________[0m
+
+    [0m[94mdef[39;49;00m[90m [39;49;00m[92mtest_full_course_returns_waitlisted[39;49;00m():[90m[39;49;00m
+>       [94massert[39;49;00m registration_decision(make_student(), make_course(capacity=[94m2[39;49;00m, enrolled=[94m2[39;49;00m)) == [33m"[39;49;00m[33mWAITLISTED[39;49;00m[33m"[39;49;00m[90m[39;49;00m
+[1m[31mE       AssertionError: assert 'REGISTERED' == 'WAITLISTED'[0m
+[1m[31mE         [0m
+[1m[31mE         [0m[91m- WAITLISTED[39;49;00m[90m[39;49;00m[0m
+[1m[31mE         [92m+ REGISTERED[39;49;00m[90m[39;49;00m[0m
+
+[1m[31mtests/test_blackbox.py[0m:84: AssertionError
+[31m[1m___________ test_successful_registration_updates_all_required_state ____________[0m
+
+    [0m[94mdef[39;49;00m[90m [39;49;00m[92mtest_successful_registration_updates_all_required_state[39;49;00m():[90m[39;49;00m
+        student = make_student(current_credits=[94m15[39;49;00m)[90m[39;49;00m
+        course = make_course(credit_hours=[94m3[39;49;00m, capacity=[94m10[39;49;00m, enrolled=[94m2[39;49;00m)[90m[39;49;00m
+        result = register_course(student, course)[90m[39;49;00m
+>       [94massert[39;49;00m result == [33m"[39;49;00m[33mREGISTERED[39;49;00m[33m"[39;49;00m[90m[39;49;00m
+[1m[31mE       AssertionError: assert 'CREDIT_LIMIT' == 'REGISTERED'[0m
+[1m[31mE         [0m
+[1m[31mE         [0m[91m- REGISTERED[39;49;00m[90m[39;49;00m[0m
+[1m[31mE         [92m+ CREDIT_LIMIT[39;49;00m[90m[39;49;00m[0m
+
+[1m[31mtests/test_blackbox.py[0m:117: AssertionError
+[31m[1m__________ test_waitlisting_adds_student_once_without_other_mutations __________[0m
+
+    [0m[94mdef[39;49;00m[90m [39;49;00m[92mtest_waitlisting_adds_student_once_without_other_mutations[39;49;00m():[90m[39;49;00m
+        student = make_student(student_id=[33m"[39;49;00m[33mS009[39;49;00m[33m"[39;49;00m)[90m[39;49;00m
+        course = make_course(capacity=[94m5[39;49;00m, enrolled=[94m5[39;49;00m)[90m[39;49;00m
+        result = register_course(student, course)[90m[39;49;00m
+>       [94massert[39;49;00m result == [33m"[39;49;00m[33mWAITLISTED[39;49;00m[33m"[39;49;00m[90m[39;49;00m
+[1m[31mE       AssertionError: assert 'REGISTERED' == 'WAITLISTED'[0m
+[1m[31mE         [0m
+[1m[31mE         [0m[91m- WAITLISTED[39;49;00m[90m[39;49;00m[0m
+[1m[31mE         [92m+ REGISTERED[39;49;00m[90m[39;49;00m[0m
+
+[1m[31mtests/test_blackbox.py[0m:126: AssertionError
+[31m[1m________________ test_existing_waitlist_entry_is_not_duplicated ________________[0m
+
+    [0m[94mdef[39;49;00m[90m [39;49;00m[92mtest_existing_waitlist_entry_is_not_duplicated[39;49;00m():[90m[39;49;00m
+        student = make_student(student_id=[33m"[39;49;00m[33mS009[39;49;00m[33m"[39;49;00m)[90m[39;49;00m
+        course = make_course(capacity=[94m5[39;49;00m, enrolled=[94m5[39;49;00m, waitlist=[[33m"[39;49;00m[33mS009[39;49;00m[33m"[39;49;00m])[90m[39;49;00m
+>       [94massert[39;49;00m register_course(student, course) == [33m"[39;49;00m[33mWAITLISTED[39;49;00m[33m"[39;49;00m[90m[39;49;00m
+[1m[31mE       AssertionError: assert 'REGISTERED' == 'WAITLISTED'[0m
+[1m[31mE         [0m
+[1m[31mE         [0m[91m- WAITLISTED[39;49;00m[90m[39;49;00m[0m
+[1m[31mE         [92m+ REGISTERED[39;49;00m[90m[39;49;00m[0m
+
+[1m[31mtests/test_blackbox.py[0m:135: AssertionError
+[31m[1m_______________ test_blocked_registration_does_not_change_state ________________[0m
+
+    [0m[94mdef[39;49;00m[90m [39;49;00m[92mtest_blocked_registration_does_not_change_state[39;49;00m():[90m[39;49;00m
+        student = make_student(outstanding_dues=[94m1[39;49;00m)[90m[39;49;00m
+        course = make_course()[90m[39;49;00m
+        student_before, course_before = copy.deepcopy(student), copy.deepcopy(course)[90m[39;49;00m
+>       [94massert[39;49;00m register_course(student, course) == [33m"[39;49;00m[33mDUES_BLOCK[39;49;00m[33m"[39;49;00m[90m[39;49;00m
+[1m[31mE       AssertionError: assert 'REGISTERED' == 'DUES_BLOCK'[0m
+[1m[31mE         [0m
+[1m[31mE         [0m[91m- DUES_BLOCK[39;49;00m[90m[39;49;00m[0m
+[1m[31mE         [92m+ REGISTERED[39;49;00m[90m[39;49;00m[0m
+
+[1m[31mtests/test_blackbox.py[0m:142: AssertionError
+[31m[1m__________________ test_withdrawal_updates_student_and_course __________________[0m
+
+    [0m[94mdef[39;49;00m[90m [39;49;00m[92mtest_withdrawal_updates_student_and_course[39;49;00m():[90m[39;49;00m
+        student = make_student(current_credits=[94m6[39;49;00m, registered_courses={[33m"[39;49;00m[33mCS201[39;49;00m[33m"[39;49;00m})[90m[39;49;00m
+        course = make_course(credit_hours=[94m3[39;49;00m, enrolled=[94m4[39;49;00m)[90m[39;49;00m
+        [94massert[39;49;00m withdraw_course(student, course) [95mis[39;49;00m [94mTrue[39;49;00m[90m[39;49;00m
+        [94massert[39;49;00m student.registered_courses == [96mset[39;49;00m()[90m[39;49;00m
+        [94massert[39;49;00m student.current_credits == [94m3[39;49;00m[90m[39;49;00m
+>       [94massert[39;49;00m course.enrolled == [94m3[39;49;00m[90m[39;49;00m
+[1m[31mE       AssertionError: assert 4 == 3[0m
+[1m[31mE        +  where 4 = Course(code='CS201', credit_hours=3, capacity=30, enrolled=4, prerequisites=set(), waitlist=[]).enrolled[0m
+
+[1m[31mtests/test_blackbox.py[0m:153: AssertionError
+[31m[1m___________________ test_prerequisite_partial_overlap_branch ___________________[0m
+
+    [0m[94mdef[39;49;00m[90m [39;49;00m[92mtest_prerequisite_partial_overlap_branch[39;49;00m():[90m[39;49;00m
+>       [94massert[39;49;00m prerequisites_satisfied({[33m"[39;49;00m[33mA[39;49;00m[33m"[39;49;00m}, {[33m"[39;49;00m[33mA[39;49;00m[33m"[39;49;00m, [33m"[39;49;00m[33mB[39;49;00m[33m"[39;49;00m}) [95mis[39;49;00m [94mFalse[39;49;00m[90m[39;49;00m
+[1m[31mE       AssertionError: assert True is False[0m
+[1m[31mE        +  where True = prerequisites_satisfied({'A'}, {'A', 'B'})[0m
+
+[1m[31mtests/test_whitebox.py[0m:43: AssertionError
+[31m[1m_______________________ test_decision_dues_block_branch ________________________[0m
+
+    [0m[94mdef[39;49;00m[90m [39;49;00m[92mtest_decision_dues_block_branch[39;49;00m():[90m[39;49;00m
+>       [94massert[39;49;00m registration_decision(student(outstanding_dues=[94m1[39;49;00m), course()) == [33m"[39;49;00m[33mDUES_BLOCK[39;49;00m[33m"[39;49;00m[90m[39;49;00m
+[1m[31mE       AssertionError: assert 'REGISTERED' == 'DUES_BLOCK'[0m
+[1m[31mE         [0m
+[1m[31mE         [0m[91m- DUES_BLOCK[39;49;00m[90m[39;49;00m[0m
+[1m[31mE         [92m+ REGISTERED[39;49;00m[90m[39;49;00m[0m
+
+[1m[31mtests/test_whitebox.py[0m:57: AssertionError
+[31m[1m________________________ test_decision_waitlist_branch _________________________[0m
+
+    [0m[94mdef[39;49;00m[90m [39;49;00m[92mtest_decision_waitlist_branch[39;49;00m():[90m[39;49;00m
+>       [94massert[39;49;00m registration_decision(student(), course(enrolled=[94m2[39;49;00m)) == [33m"[39;49;00m[33mWAITLISTED[39;49;00m[33m"[39;49;00m[90m[39;49;00m
+[1m[31mE       AssertionError: assert 'REGISTERED' == 'WAITLISTED'[0m
+[1m[31mE         [0m
+[1m[31mE         [0m[91m- WAITLISTED[39;49;00m[90m[39;49;00m[0m
+[1m[31mE         [92m+ REGISTERED[39;49;00m[90m[39;49;00m[0m
+
+[1m[31mtests/test_whitebox.py[0m:69: AssertionError
+[31m[1m_____________________ test_register_course_waitlist_branch _____________________[0m
+
+    [0m[94mdef[39;49;00m[90m [39;49;00m[92mtest_register_course_waitlist_branch[39;49;00m():[90m[39;49;00m
+        s, c = student(), course(enrolled=[94m2[39;49;00m)[90m[39;49;00m
+>       [94massert[39;49;00m register_course(s, c) == [33m"[39;49;00m[33mWAITLISTED[39;49;00m[33m"[39;49;00m[90m[39;49;00m
+[1m[31mE       AssertionError: assert 'REGISTERED' == 'WAITLISTED'[0m
+[1m[31mE         [0m
+[1m[31mE         [0m[91m- WAITLISTED[39;49;00m[90m[39;49;00m[0m
+[1m[31mE         [92m+ REGISTERED[39;49;00m[90m[39;49;00m[0m
+
+[1m[31mtests/test_whitebox.py[0m:83: AssertionError
+[31m[1m________________ test_register_course_existing_waitlist_branch _________________[0m
+
+    [0m[94mdef[39;49;00m[90m [39;49;00m[92mtest_register_course_existing_waitlist_branch[39;49;00m():[90m[39;49;00m
+        s, c = student(), course(enrolled=[94m2[39;49;00m, waitlist=[[33m"[39;49;00m[33mW001[39;49;00m[33m"[39;49;00m])[90m[39;49;00m
+>       [94massert[39;49;00m register_course(s, c) == [33m"[39;49;00m[33mWAITLISTED[39;49;00m[33m"[39;49;00m[90m[39;49;00m
+[1m[31mE       AssertionError: assert 'REGISTERED' == 'WAITLISTED'[0m
+[1m[31mE         [0m
+[1m[31mE         [0m[91m- WAITLISTED[39;49;00m[90m[39;49;00m[0m
+[1m[31mE         [92m+ REGISTERED[39;49;00m[90m[39;49;00m[0m
+
+[1m[31mtests/test_whitebox.py[0m:88: AssertionError
+[31m[1m________________ test_register_course_unsuccessful_noop_branch _________________[0m
+
+    [0m[94mdef[39;49;00m[90m [39;49;00m[92mtest_register_course_unsuccessful_noop_branch[39;49;00m():[90m[39;49;00m
+        s, c = student(outstanding_dues=[94m1[39;49;00m), course()[90m[39;49;00m
+        before = ([96mset[39;49;00m(s.registered_courses), s.current_credits, c.enrolled, [96mlist[39;49;00m(c.waitlist))[90m[39;49;00m
+>       [94massert[39;49;00m register_course(s, c) == [33m"[39;49;00m[33mDUES_BLOCK[39;49;00m[33m"[39;49;00m[90m[39;49;00m
+[1m[31mE       AssertionError: assert 'REGISTERED' == 'DUES_BLOCK'[0m
+[1m[31mE         [0m
+[1m[31mE         [0m[91m- DUES_BLOCK[39;49;00m[90m[39;49;00m[0m
+[1m[31mE         [92m+ REGISTERED[39;49;00m[90m[39;49;00m[0m
+
+[1m[31mtests/test_whitebox.py[0m:94: AssertionError
+[31m[1m_______________________ test_withdraw_course_true_branch _______________________[0m
+
+    [0m[94mdef[39;49;00m[90m [39;49;00m[92mtest_withdraw_course_true_branch[39;49;00m():[90m[39;49;00m
+        s, c = student(current_credits=[94m2[39;49;00m, registered_courses={[33m"[39;49;00m[33mWB101[39;49;00m[33m"[39;49;00m}), course(enrolled=[94m1[39;49;00m)[90m[39;49;00m
+        [94massert[39;49;00m withdraw_course(s, c) [95mis[39;49;00m [94mTrue[39;49;00m[90m[39;49;00m
+        [94massert[39;49;00m s.registered_courses == [96mset[39;49;00m()[90m[39;49;00m
+        [94massert[39;49;00m s.current_credits == [94m0[39;49;00m[90m[39;49;00m
+>       [94massert[39;49;00m c.enrolled == [94m0[39;49;00m[90m[39;49;00m
+[1m[31mE       AssertionError: assert 1 == 0[0m
+[1m[31mE        +  where 1 = Course(code='WB101', credit_hours=2, capacity=2, enrolled=1, prerequisites=set(), waitlist=[]).enrolled[0m
+
+[1m[31mtests/test_whitebox.py[0m:102: AssertionError
+[36m[1m=========================== short test summary info ============================[0m
+[31mFAILED[0m tests/test_blackbox.py::[1mtest_credit_limit_boundaries[14-4-True][0m - assert False is True
+ +  where False = check_credit_limit(14, 4)
+[31mFAILED[0m tests/test_blackbox.py::[1mtest_credit_limit_boundaries[15-3-True][0m - assert False is True
+ +  where False = check_credit_limit(15, 3)
+[31mFAILED[0m tests/test_blackbox.py::[1mtest_one_missing_prerequisite_means_not_satisfied[0m - AssertionError: assert True is False
+ +  where True = prerequisites_satisfied({'CS101'}, {'CS101', 'MATH101'})
+[31mFAILED[0m tests/test_blackbox.py::[1mtest_any_positive_dues_block_registration[0m - AssertionError: assert 'REGISTERED' == 'DUES_BLOCK'
+  
+  [0m[91m- DUES_BLOCK[39;49;00m[90m[39;49;00m
+  [92m+ REGISTERED[39;49;00m[90m[39;49;00m
+[31mFAILED[0m tests/test_blackbox.py::[1mtest_missing_prerequisite_blocks_registration[0m - AssertionError: assert 'REGISTERED' == 'PREREQUISITES_MISSING'
+  
+  [0m[91m- PREREQUISITES_MISSING[39;49;00m[90m[39;49;00m
+  [92m+ REGISTERED[39;49;00m[90m[39;49;00m
+[31mFAILED[0m tests/test_blackbox.py::[1mtest_exactly_18_credits_is_allowed_in_decision[0m - AssertionError: assert 'CREDIT_LIMIT' == 'REGISTERED'
+  
+  [0m[91m- REGISTERED[39;49;00m[90m[39;49;00m
+  [92m+ CREDIT_LIMIT[39;49;00m[90m[39;49;00m
+[31mFAILED[0m tests/test_blackbox.py::[1mtest_full_course_returns_waitlisted[0m - AssertionError: assert 'REGISTERED' == 'WAITLISTED'
+  
+  [0m[91m- WAITLISTED[39;49;00m[90m[39;49;00m
+  [92m+ REGISTERED[39;49;00m[90m[39;49;00m
+[31mFAILED[0m tests/test_blackbox.py::[1mtest_successful_registration_updates_all_required_state[0m - AssertionError: assert 'CREDIT_LIMIT' == 'REGISTERED'
+  
+  [0m[91m- REGISTERED[39;49;00m[90m[39;49;00m
+  [92m+ CREDIT_LIMIT[39;49;00m[90m[39;49;00m
+[31mFAILED[0m tests/test_blackbox.py::[1mtest_waitlisting_adds_student_once_without_other_mutations[0m - AssertionError: assert 'REGISTERED' == 'WAITLISTED'
+  
+  [0m[91m- WAITLISTED[39;49;00m[90m[39;49;00m
+  [92m+ REGISTERED[39;49;00m[90m[39;49;00m
+[31mFAILED[0m tests/test_blackbox.py::[1mtest_existing_waitlist_entry_is_not_duplicated[0m - AssertionError: assert 'REGISTERED' == 'WAITLISTED'
+  
+  [0m[91m- WAITLISTED[39;49;00m[90m[39;49;00m
+  [92m+ REGISTERED[39;49;00m[90m[39;49;00m
+[31mFAILED[0m tests/test_blackbox.py::[1mtest_blocked_registration_does_not_change_state[0m - AssertionError: assert 'REGISTERED' == 'DUES_BLOCK'
+  
+  [0m[91m- DUES_BLOCK[39;49;00m[90m[39;49;00m
+  [92m+ REGISTERED[39;49;00m[90m[39;49;00m
+[31mFAILED[0m tests/test_blackbox.py::[1mtest_withdrawal_updates_student_and_course[0m - AssertionError: assert 4 == 3
+ +  where 4 = Course(code='CS201', credit_hours=3, capacity=30, enrolled=4, prerequisites=set(), waitlist=[]).enrolled
+[31mFAILED[0m tests/test_whitebox.py::[1mtest_prerequisite_partial_overlap_branch[0m - AssertionError: assert True is False
+ +  where True = prerequisites_satisfied({'A'}, {'A', 'B'})
+[31mFAILED[0m tests/test_whitebox.py::[1mtest_decision_dues_block_branch[0m - AssertionError: assert 'REGISTERED' == 'DUES_BLOCK'
+  
+  [0m[91m- DUES_BLOCK[39;49;00m[90m[39;49;00m
+  [92m+ REGISTERED[39;49;00m[90m[39;49;00m
+[31mFAILED[0m tests/test_whitebox.py::[1mtest_decision_waitlist_branch[0m - AssertionError: assert 'REGISTERED' == 'WAITLISTED'
+  
+  [0m[91m- WAITLISTED[39;49;00m[90m[39;49;00m
+  [92m+ REGISTERED[39;49;00m[90m[39;49;00m
+[31mFAILED[0m tests/test_whitebox.py::[1mtest_register_course_waitlist_branch[0m - AssertionError: assert 'REGISTERED' == 'WAITLISTED'
+  
+  [0m[91m- WAITLISTED[39;49;00m[90m[39;49;00m
+  [92m+ REGISTERED[39;49;00m[90m[39;49;00m
+[31mFAILED[0m tests/test_whitebox.py::[1mtest_register_course_existing_waitlist_branch[0m - AssertionError: assert 'REGISTERED' == 'WAITLISTED'
+  
+  [0m[91m- WAITLISTED[39;49;00m[90m[39;49;00m
+  [92m+ REGISTERED[39;49;00m[90m[39;49;00m
+[31mFAILED[0m tests/test_whitebox.py::[1mtest_register_course_unsuccessful_noop_branch[0m - AssertionError: assert 'REGISTERED' == 'DUES_BLOCK'
+  
+  [0m[91m- DUES_BLOCK[39;49;00m[90m[39;49;00m
+  [92m+ REGISTERED[39;49;00m[90m[39;49;00m
+[31mFAILED[0m tests/test_whitebox.py::[1mtest_withdraw_course_true_branch[0m - AssertionError: assert 1 == 0
+ +  where 1 = Course(code='WB101', credit_hours=2, capacity=2, enrolled=1, prerequisites=set(), waitlist=[]).enrolled
+[31m[31m[1m19 failed[0m, [32m37 passed[0m[31m in 0.27s[0m[0m
+Spreadsheet runtime warmup failed during python startup
+Traceback (most recent call last):
+  File "/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/patches/warm_spreadsheet_runtime_on_startup.py", line 26, in warm_spreadsheet_runtime_on_startup
+  File "/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/spreadsheet_warmup.py", line 785, in warm_spreadsheet_runtime
+  File "/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/spreadsheet_warmup.py", line 718, in _warm_feature_flows
+  File "/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/spreadsheet_warmup.py", line 509, in _warm_drawing_and_image_flows
+  File "/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/generated/interface/models.py", line 32861, in bring_to_front
+  File "/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/rpc/remote.py", line 764, in __call__
+  File "/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/rpc/client.py", line 175, in call
+artifact_tool.rpc.client.RemoteError: Element ordering requires an owning element collection.
